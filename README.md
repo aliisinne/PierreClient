@@ -1,41 +1,50 @@
 <div align="center">
-  <img src="https://via.placeholder.com/150/1a1a1a/ffffff?text=Pierre+Client" alt="Pierre Client Logo" width="150" />
-  <h1>Pierre Client 1.21.11</h1>
-  <p><strong>Minecraft 1.21.11 için Özel Olarak Geliştirilmiş, Ultra Optimize Fabric İstemcisi</strong></p>
+  <img src="https://via.placeholder.com/200/1a1a1a/ffffff?text=Pierre+Client" alt="Pierre Client Logo" width="200" />
+  <h1>Pierre Client</h1>
+  <p><strong>A custom-built, ultra-optimized Minecraft 1.21.11 client and launcher.</strong></p>
+
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![Platform](https://img.shields.io/badge/Platform-Windows-blue.svg)](#)
+  [![Minecraft](https://img.shields.io/badge/Minecraft-1.21.11-success.svg)](#)
 </div>
 
 <br/>
 
-## 🚀 Özellikler
+## 🚀 Features
 
-Pierre Client, standart Minecraft'ın ötesine geçmek için C# ve .NET Core kullanılarak sıfırdan yazılmış bir Launcher sistemine sahiptir.
+Pierre Client is an advanced Minecraft launcher and client integration written from scratch in C# and .NET Core.
 
-* **Özel 1.21.11 Versiyonu:** Minecraft'ın özel yapım 1.21.11 sürümünü tam uyumlulukla çalıştırır.
-* **Otomatik Mod ve Kütüphane Kurulumu:** Gerekli tüm Fabric kütüphanelerini, performans modlarını ve RPC eklentilerini oyun dizinine otomatik kurar.
-* **Akıllı Java Yönetimi:** CmlLib destekli sistem sayesinde en uygun Java 21 sürümünü bulur veya indirir.
-* **Discord Rich Presence (RPC):** Arka planda C# üzerinden Discord hesabınıza "Minecraft Oynuyor - Pierre Client" durumunu yansıtır. Mod çakışmalarını (SimpleRPC) ortadan kaldırır.
-* **Komut Satırı Sınırı Aşımı (Bypass):** Windows'un 8191 karakterlik devasa mod komut satırı çökertme sorununu Java `@argfile` teknolojisiyle ezer geçer. Sessiz çökmelere son!
-* **Hafif ve Hızlı:** WPF tabanlı modern ve akıcı arayüz.
+* **Minecraft 1.21.11 Support:** Fully supports and launches the custom 1.21.11 version.
+* **Auto-Installer:** Automatically downloads and synchronizes required Fabric libraries and mods directly into your game folder.
+* **Smart Java Management:** Uses CmlLib to automatically locate or download the correct Java 21 runtime.
+* **Native Discord RPC:** Built-in Discord Rich Presence displays your game status directly from the launcher without needing in-game mods that cause version conflicts.
+* **Command-Line Limit Bypass:** Uses Java `@argfile` injection to bypass the Windows 8191 character limit, preventing silent crashes when launching heavily modded instances.
+* **Sleek UI:** Modern and lightweight WPF-based user interface.
 
-## 🛠️ Kurulum ve Kullanım
+## 📥 Download & Install
 
-1. **İndirin:** Bu depoyu sağ üstten `Code > Download ZIP` diyerek veya `git clone` ile bilgisayarınıza indirin.
-2. **Derleyin (Geliştiriciler İçin):** `PierreLauncher` klasörüne girip `dotnet build` komutunu çalıştırarak `.exe` dosyanızı oluşturabilirsiniz.
-3. **Çalıştırın:** Çıktı klasöründeki `PierreLauncher.exe` dosyasını çalıştırın veya ana dizindeki `Oyunu Başlat.bat` dosyasını kullanın.
-4. Launcher açıldığında doğrudan **"Oyna"** butonuna basın. Gerisini Pierre halleder!
+1. Download the latest source from the repository.
+2. Ensure you have the [.NET 10.0 SDK](https://dotnet.microsoft.com/download) installed on your system.
+3. Build the project and run the output executable.
 
-## 🔧 Teknik Detaylar
+## 🛠️ How to Compile
 
-- **Framework:** .NET 10.0 (Windows)
-- **UI Kütüphanesi:** WPF (Windows Presentation Foundation)
-- **Minecraft Core:** CmlLib.Core (v4.0.0-beta)
-- **Discord Entegrasyonu:** DiscordRichPresence (v1.2.1.24)
+To compile the launcher from source, open a terminal in the project directory and run:
 
-## 🐛 Bilinen Sorunlar ve Çözümleri
-* *CraterLib uyuşmazlığı:* Modrinth üzerindeki `craterlib` (3.x) sürümü 1.21.11 yapısı ile uyuşmazlık gösterdiği için yükleme listesinden kaldırılmış, tüm entegrasyonlar ana Launcher içine C# ile gömülmüştür. Mod içine atmayın.
-* *Sessiz Kapanma (Log Yok):* Java `@argfile` sayesinde tamamen çözüldü.
+```bash
+cd PierreLauncher
+dotnet build -c Release
+```
 
----
-<div align="center">
-  Geliştirici: <b>Pierre Ekibi</b>
-</div>
+The compiled executable will be located in `PierreLauncher/bin/Release/net10.0-windows/`.
+Alternatively, you can run `Start.bat` (formerly Oyunu Başlat.bat) from the root directory for quick testing.
+
+## ⚙️ Architecture
+
+- **Framework:** .NET 10.0 (WPF)
+- **Core Library:** CmlLib.Core for Minecraft environment management.
+- **RPC:** DiscordRichPresence library for C#.
+
+## 📜 License
+
+This project is open-source and available under the MIT License.
