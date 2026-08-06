@@ -7,4 +7,3 @@ echo Done.
 echo Creating Setup...
 "C:\Users\mymai\AppData\Local\Programs\Inno Setup 6\ISCC.exe" "Installer.iss"
 echo Setup created in Output/ folder!
-pause

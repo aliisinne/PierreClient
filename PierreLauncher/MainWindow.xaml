@@ -323,7 +323,7 @@
 
                     <!-- App Logo & Subtext (PROPORTIONATE PROMINENT GREEN CAPSULE LOGO) -->
                     <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="4,0,0,0">
-                        <Image x:Name="ImgHeaderLogo" Source="Assets/logo_p.png" Height="30" Stretch="Uniform" HorizontalAlignment="Left" Margin="0,0,0,4" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <Image x:Name="ImgHeaderLogo" Source="Assets/icon.png" Height="30" Stretch="Uniform" HorizontalAlignment="Left" Margin="0,0,0,4" RenderOptions.BitmapScalingMode="HighQuality"/>
                         <TextBlock x:Name="TxtWelcomeSubtitle" Text="Oynayın ve daha iyi bir deneyimin tadını çıkarın!" Foreground="#B0BEC5" FontSize="11" FontWeight="SemiBold"/>
                     </StackPanel>
 
@@ -416,7 +416,7 @@
                                     <!-- Hero Logo Area (Cleanly Scaled Logo + Well-Spaced Text) -->
                                     <Grid Grid.Row="1" Margin="0,6">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <Image x:Name="ImgCenterLogo" Source="Assets/logo_p.png" Height="80" Stretch="Uniform" Margin="0,0,0,10" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                            <Image x:Name="ImgCenterLogo" Source="Assets/icon.png" Height="80" Stretch="Uniform" Margin="0,0,0,10" RenderOptions.BitmapScalingMode="HighQuality"/>
                                             <TextBlock Text="Fabric 1.21.11 | PierreClient &amp; Fabric API Ready" Foreground="#00E676" FontSize="12" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                                         </StackPanel>
                                     </Grid>

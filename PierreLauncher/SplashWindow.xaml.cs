@@ -102,7 +102,10 @@ namespace PierreLauncher
             }
 
             // Ensure Portable Java 21 exists
-            string runtimeDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Runtime");
+            string pierreDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "PierreClient");
+            if (!Directory.Exists(pierreDataDir)) Directory.CreateDirectory(pierreDataDir);
+            
+            string runtimeDir = Path.Combine(pierreDataDir, "Runtime");
             string javaDir = Path.Combine(runtimeDir, "Java21");
             string javaExe = Path.Combine(javaDir, "bin", "java.exe");
             

@@ -317,7 +317,8 @@ namespace PierreLauncher.Services
                 return customJavaPath;
 
             // 1. Check for our newly downloaded Portable Java 21
-            string portableJavaDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Runtime", "Java21");
+            string pierreDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "PierreClient");
+            string portableJavaDir = Path.Combine(pierreDataDir, "Runtime", "Java21");
             if (Directory.Exists(portableJavaDir))
             {
                 var files = Directory.GetFiles(portableJavaDir, "java.exe", SearchOption.AllDirectories);
