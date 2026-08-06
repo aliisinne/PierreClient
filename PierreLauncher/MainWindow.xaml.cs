@@ -48,14 +48,7 @@ namespace PierreLauncher
             _rpcClient.SetPresence(new DiscordRPC.RichPresence()
             {
                 Details = "Launcher'da",
-                State = "Oyuna Hazırlanıyor...",
-                Assets = new DiscordRPC.Assets()
-                {
-                    LargeImageKey = "logo",
-                    LargeImageText = "Pierre Client 1.21.11",
-                    SmallImageKey = "minecraft",
-                    SmallImageText = "Launcher"
-                }
+                State = "Oyuna Hazırlanıyor..."
             });
         }
 
@@ -503,13 +496,9 @@ namespace PierreLauncher
             {
                 _rpcClient.SetPresence(new DiscordRPC.RichPresence()
                 {
-                    Details = "Oyunu Başlatıyor",
+                    Details = "Oyun Açık",
                     State = $"Hesap: {activeAccount.Username}",
-                    Assets = new DiscordRPC.Assets()
-                    {
-                        LargeImageKey = "logo",
-                        LargeImageText = "Pierre Client 1.21.11"
-                    }
+                    Timestamps = DiscordRPC.Timestamps.Now
                 });
             }
 
