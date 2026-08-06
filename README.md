@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://via.placeholder.com/200/1a1a1a/ffffff?text=Pierre+Client" alt="Pierre Client Logo" width="200" />
+  <img src="PierreLauncher/Assets/logo.png" alt="Pierre Client Logo" width="450" />
   <h1>Pierre Client</h1>
   <p><strong>Open-source custom Minecraft 1.21.11 client and launcher.</strong></p>
 
