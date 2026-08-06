@@ -24,7 +24,18 @@ const translations = {
     news_subtitle: "Oyun içi güncellemeler ve duyurular doğrudan buraya yansır.",
     news_loading: "Haberler yükleniyor...",
     news_empty: "Şu an gösterilecek bir haber bulunmuyor.",
-    news_error: "Haberler yüklenirken bir sorun oluştu. Daha sonra tekrar deneyin."
+    news_error: "Haberler yüklenirken bir sorun oluştu. Daha sonra tekrar deneyin.",
+    com_title: "Topluluğa Katılın",
+    com_desc: "Binlerce oyuncunun bulunduğu açık kaynak topluluğumuza katılın, yeni güncellemeleri ilk siz öğrenin.",
+    com_btn: "Github'da Yıldızla",
+    faq_title_1: "Sıkça Sorulan",
+    faq_title_2: "Sorular",
+    faq_1_q: "Tamamen ücretsiz mi?",
+    faq_1_a: "Evet, Pierre Client %100 açık kaynak kodlu ve tamamen ücretsizdir.",
+    faq_2_q: "Hangi Minecraft sürümünü destekliyor?",
+    faq_2_a: "Şu anda en popüler ve güncel sürüm olan 1.21.11 Fabric altyapısı ile tam uyumlu çalışmaktadır.",
+    faq_3_q: "Java kurmama gerek var mı?",
+    faq_3_a: "Hayır! İndireceğiniz Kurulum (.exe) dosyası oyunun çalışması için gereken Java ve diğer tüm altyapıları arka planda kendisi halleder."
   },
   en: {
     nav_home: "Home",
@@ -48,7 +59,18 @@ const translations = {
     news_subtitle: "In-game updates and announcements reflect directly here.",
     news_loading: "Loading news...",
     news_empty: "There is no news to show right now.",
-    news_error: "An error occurred while loading news. Please try again later."
+    news_error: "An error occurred while loading news. Please try again later.",
+    com_title: "Join the Community",
+    com_desc: "Join our open-source community of thousands of players and be the first to know about new updates.",
+    com_btn: "Star on Github",
+    faq_title_1: "Frequently Asked",
+    faq_title_2: "Questions",
+    faq_1_q: "Is it completely free?",
+    faq_1_a: "Yes, Pierre Client is 100% open source and completely free.",
+    faq_2_q: "Which Minecraft version does it support?",
+    faq_2_a: "It currently runs fully compatible with the most popular and up-to-date version, 1.21.11 Fabric infrastructure.",
+    faq_3_q: "Do I need to install Java?",
+    faq_3_a: "No! The Setup (.exe) file you download will handle Java and all other required infrastructures in the background on its own."
   }
 };
 
