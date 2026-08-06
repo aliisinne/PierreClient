@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/Assets/icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Pierre Client - En iyi 1.21.11 Fabric Minecraft deneyimi. Modlar entegre, yüksek performans ve yepyeni bir tasarım." />
+    <title>Pierre Client | Resmi İndirme Merkezi</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Background overlay -->
+    <div class="bg-overlay"></div>
+
+    <div class="container">
+      <!-- Navbar -->
+      <nav class="navbar glass-panel">
+        <div class="nav-brand">
+          <img src="/Assets/icon.png" alt="Pierre Logo" class="brand-logo" />
+          <h1>PIERRE</h1>
+        </div>
+        <div class="nav-links">
+          <a href="#home">Ana Sayfa</a>
+          <a href="#features">Özellikler</a>
+          <a href="#news">Haberler</a>
+          <a href="https://github.com/aliisinne/PierreClient" target="_blank" class="nav-btn">Github</a>
+        </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <main id="home" class="hero">
+        <div class="hero-content">
+          <div class="logo-container">
+             <img src="/Assets/icon.png" alt="Pierre 3D Logo" class="hero-logo floating" />
+             <div class="glow-effect"></div>
+          </div>
+          <h2 class="hero-title">Oyun Deneyiminizi <br/><span class="text-green">Mükemmelleştirin.</span></h2>
+          <p class="hero-subtitle">1.21.11 Fabric altyapısıyla yep yeni Pierre Client sürümü artık erişilebilir. Yüksek FPS, entegre modlar ve ultra güvenlik.</p>
+          
+          <div class="hero-actions">
+            <a href="https://github.com/aliisinne/PierreClient/releases/download/v1.0.0/PierreClient_Setup_v1.0.exe" class="btn btn-primary" id="downloadBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              HEMEN İNDİR
+            </a>
+            <a href="#features" class="btn btn-secondary">Daha Fazla Bilgi</a>
+          </div>
+          <p class="version-info">Sürüm: v1.0.0 | Boyut: ~160 MB</p>
+        </div>
+      </main>
+
+      <!-- Features Section -->
+      <section id="features" class="features">
+        <h3 class="section-title">Neden <span class="text-green">Pierre Client?</span></h3>
+        <div class="feature-grid">
+          <div class="feature-card glass-panel">
+            <div class="icon-wrapper">🚀</div>
+            <h4>Ultra Performans</h4>
+            <p>Sodium, Lithium ve diğer optimizasyon modlarıyla standart istemcilere göre çok daha yüksek FPS değerleri.</p>
+          </div>
+          <div class="feature-card glass-panel">
+            <div class="icon-wrapper">🛡️</div>
+            <h4>Anti-Tamper Güvenliği</h4>
+            <p>Oyuna izinsiz mod eklenmesini engelleyerek her oyuncunun eşit ve güvenli şartlarda oynamasını sağlar.</p>
+          </div>
+          <div class="feature-card glass-panel">
+            <div class="icon-wrapper">⚡</div>
+            <h4>Bağımsız Kurulum</h4>
+            <p>Bilgisayarınızda Java yüklü olmasına bile gerek yok. Kurulum aracı tüm kütüphaneleri arka planda kendi ayarlar.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live News Section -->
+      <section id="news" class="news-section">
+        <h3 class="section-title">Canlı <span class="text-green">Haberler</span></h3>
+        <p class="news-subtitle">Oyun içi güncellemeler ve duyurular doğrudan buraya yansır.</p>
+        <div id="news-container" class="news-grid">
+          <!-- News items will be loaded dynamically via JS -->
+          <div class="loading">Haberler yükleniyor...</div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer glass-panel">
+        <div class="footer-content">
+          <p>&copy; 2026 Pierre Client. Tüm hakları saklıdır.</p>
+          <p>Made with ❤️ for Minecraft.</p>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
