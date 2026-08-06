@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Pierre Client Launcher" 
         Height="540" Width="890"
-        Icon="Assets/logo_p.png"
+        Icon="Assets/icon.png"
         WindowStyle="None" 
         AllowsTransparency="True" 
         Background="Transparent" 
