@@ -324,7 +324,7 @@
                     <!-- App Logo & Subtext (PROPORTIONATE PROMINENT GREEN CAPSULE LOGO) -->
                     <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="4,0,0,0">
                         <Image x:Name="ImgHeaderLogo" Source="Assets/logo_p.png" Height="30" Stretch="Uniform" HorizontalAlignment="Left" Margin="0,0,0,4" RenderOptions.BitmapScalingMode="HighQuality"/>
-                        <TextBlock Text="Oynayın ve daha iyi bir deneyimin tadını çıkarın!" Foreground="#B0BEC5" FontSize="11" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="TxtWelcomeSubtitle" Text="Oynayın ve daha iyi bir deneyimin tadını çıkarın!" Foreground="#B0BEC5" FontSize="11" FontWeight="SemiBold"/>
                     </StackPanel>
 
                     <!-- Drag Handle Area -->
@@ -359,7 +359,7 @@
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                                         <!-- Header Title with Green Underline -->
                                         <StackPanel HorizontalAlignment="Center" Margin="0,0,0,16">
-                                            <TextBlock Text="Bir hesap seçin" Foreground="#FFFFFF" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                            <TextBlock x:Name="TxtAccountSelectHeader" Text="Bir hesap seçin" Foreground="#FFFFFF" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
                                             <Rectangle Width="90" Height="3" Fill="#00E676" Margin="0,4,0,0" HorizontalAlignment="Center"/>
                                         </StackPanel>
 
@@ -380,7 +380,7 @@
                                         <Button Style="{StaticResource DarkCardBtnStyle}" Width="160" Height="40" Click="OpenAddAccountModal_Click" Margin="0,12,0,0">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="👤" FontSize="14" Margin="0,0,6,0" VerticalAlignment="Center"/>
-                                                <TextBlock Text="Hesap Ekle" FontWeight="Bold" FontSize="13" VerticalAlignment="Center"/>
+                                                <TextBlock x:Name="TxtAddAccountBtn" Text="Hesap Ekle" FontWeight="Bold" FontSize="13" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
                                     </StackPanel>
@@ -492,17 +492,17 @@
                                 <StackPanel>
                                     <Border Background="#141820" CornerRadius="8" Padding="12" Margin="0,0,0,10">
                                         <StackPanel>
-                                            <TextBlock Text="Pierre Client Yayında!" Foreground="#FFFFFF" FontWeight="Bold" FontSize="13" Margin="0,0,0,4"/>
-                                            <TextBlock Text="1.21.11 Fabric altyapısıyla yep yeni Pierre Client sürümü artık erişilebilir. Modlar entegre edildi, stabilite artırıldı." Foreground="#A0AAB0" FontSize="11" TextWrapping="Wrap"/>
-                                            <TextBlock Text="Bugün, 12:00" Foreground="#00E676" FontSize="9" Margin="0,6,0,0"/>
+                                            <TextBlock x:Name="TxtNews1Title" Text="Pierre Client Yayında!" Foreground="#FFFFFF" FontWeight="Bold" FontSize="13" Margin="0,0,0,4"/>
+                                            <TextBlock x:Name="TxtNews1Desc" Text="1.21.11 Fabric altyapısıyla yep yeni Pierre Client sürümü artık erişilebilir. Modlar entegre edildi, stabilite artırıldı." Foreground="#A0AAB0" FontSize="11" TextWrapping="Wrap"/>
+                                            <TextBlock x:Name="TxtNews1Date" Text="Bugün, 12:00" Foreground="#00E676" FontSize="9" Margin="0,6,0,0"/>
                                         </StackPanel>
                                     </Border>
 
                                     <Border Background="#141820" CornerRadius="8" Padding="12" Margin="0,0,0,10">
                                         <StackPanel>
-                                            <TextBlock Text="Anti-Tamper Aktif" Foreground="#FFFFFF" FontWeight="Bold" FontSize="13" Margin="0,0,0,4"/>
-                                            <TextBlock Text="İzinsiz mod eklemeyi önleyen güvenlik sistemi aktifleştirildi. Client artık çok daha güvenli." Foreground="#A0AAB0" FontSize="11" TextWrapping="Wrap"/>
-                                            <TextBlock Text="Dün, 18:30" Foreground="#00E676" FontSize="9" Margin="0,6,0,0"/>
+                                            <TextBlock x:Name="TxtNews2Title" Text="Anti-Tamper Aktif" Foreground="#FFFFFF" FontWeight="Bold" FontSize="13" Margin="0,0,0,4"/>
+                                            <TextBlock x:Name="TxtNews2Desc" Text="İzinsiz mod eklemeyi önleyen güvenlik sistemi aktifleştirildi. Client artık çok daha güvenli." Foreground="#A0AAB0" FontSize="11" TextWrapping="Wrap"/>
+                                            <TextBlock x:Name="TxtNews2Date" Text="Dün, 18:30" Foreground="#00E676" FontSize="9" Margin="0,6,0,0"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
@@ -527,7 +527,7 @@
                                 <Border Background="#181D26" BorderBrush="#00E676" BorderThickness="1" CornerRadius="8" Padding="12,8">
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                         <TextBlock Text="☕ " Foreground="#00E676" FontSize="13"/>
-                                        <TextBlock Text="Java 21 (Varsayılan - Sabit)" Foreground="#FFFFFF" FontWeight="Bold" FontSize="12"/>
+                                        <TextBlock x:Name="TxtJavaBadge" Text="Java 21 (Varsayılan - Sabit)" Foreground="#FFFFFF" FontWeight="Bold" FontSize="12"/>
                                     </StackPanel>
                                 </Border>
                             </Grid>

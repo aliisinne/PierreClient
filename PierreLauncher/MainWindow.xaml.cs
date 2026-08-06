@@ -172,6 +172,20 @@ namespace PierreLauncher
             if (TxtAddAccountTitle != null) TxtAddAccountTitle.Text = isEnglish ? "Add Account" : "Hesap Ekle";
             if (TxtAddAccountDesc != null) TxtAddAccountDesc.Text = isEnglish ? "👤 Username (Nickname):" : "👤 Kullanıcı Adı (Nickname):";
             if (TxtBtnAddAccount != null) TxtBtnAddAccount.Text = isEnglish ? "ADD OFFLINE ACCOUNT" : "ÇEVRİMDIŞI HESAP EKLE";
+
+            if (TxtWelcomeSubtitle != null) TxtWelcomeSubtitle.Text = isEnglish ? "Play and enjoy a better experience!" : "Oynayın ve daha iyi bir deneyimin tadını çıkarın!";
+            if (TxtAccountSelectHeader != null) TxtAccountSelectHeader.Text = isEnglish ? "Choose an account" : "Bir hesap seçin";
+            if (TxtAddAccountBtn != null) TxtAddAccountBtn.Text = isEnglish ? "Add Account" : "Hesap Ekle";
+            if (TxtJavaBadge != null) TxtJavaBadge.Text = isEnglish ? "Java 21 (Default - Fixed)" : "Java 21 (Varsayılan - Sabit)";
+
+            // News Translations
+            if (TxtNews1Title != null) TxtNews1Title.Text = isEnglish ? "Pierre Client is Live!" : "Pierre Client Yayında!";
+            if (TxtNews1Desc != null) TxtNews1Desc.Text = isEnglish ? "The brand new Pierre Client with 1.21.11 Fabric infrastructure is now available. Mods are integrated, stability is improved." : "1.21.11 Fabric altyapısıyla yep yeni Pierre Client sürümü artık erişilebilir. Modlar entegre edildi, stabilite artırıldı.";
+            if (TxtNews1Date != null) TxtNews1Date.Text = isEnglish ? "Today, 12:00" : "Bugün, 12:00";
+            
+            if (TxtNews2Title != null) TxtNews2Title.Text = isEnglish ? "Anti-Tamper Active" : "Anti-Tamper Aktif";
+            if (TxtNews2Desc != null) TxtNews2Desc.Text = isEnglish ? "Security system preventing unauthorized mod additions is activated. The client is now much more secure." : "İzinsiz mod eklemeyi önleyen güvenlik sistemi aktifleştirildi. Client artık çok daha güvenli.";
+            if (TxtNews2Date != null) TxtNews2Date.Text = isEnglish ? "Yesterday, 18:30" : "Dün, 18:30";
         }
 
         private void RenderAccountsList()
@@ -243,9 +257,17 @@ namespace PierreLauncher
                 FontWeight = FontWeights.Bold,
                 FontSize = 14
             };
+            bool isEnglish = _configService.Config.SelectedLanguage == "English";
+            var timeSince = DateTime.Now - acc.LastLoginTime;
+            string displayLastLogin = "";
+            if (timeSince.TotalMinutes < 1)
+                displayLastLogin = isEnglish ? "Last login: a few seconds ago" : "Son giriş: birkaç saniye önce";
+            else
+                displayLastLogin = isEnglish ? $"Last login: {(int)timeSince.TotalMinutes} minutes ago" : $"Son giriş: {(int)timeSince.TotalMinutes} dakika önce";
+
             var subText = new TextBlock
             {
-                Text = acc.DisplayLastLogin,
+                Text = displayLastLogin,
                 Foreground = new SolidColorBrush(Color.FromRgb(0xA0, 0xAA, 0xB0)),
                 FontSize = 11,
                 Margin = new Thickness(0, 2, 0, 0)
