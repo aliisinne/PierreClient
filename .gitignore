@@ -1,0 +1,27 @@
+# Visual Studio / .NET Core
+.vs/
+[Bb]in/
+[Oo]bj/
+[Tt]est[Rr]esults/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.log
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# IDEs
+.idea/
+*.swp
+
+# Pierre Client Specific
+logs/
+PierreLauncher/bin/
+PierreLauncher/obj/
+*.heapdump
