@@ -5,6 +5,7 @@ const translations = {
   tr: {
     nav_home: "Ana Sayfa",
     nav_features: "Özellikler",
+    nav_versions: "Sürümler",
     nav_news: "Haberler",
     hero_title_1: "Oyun Deneyiminizi <br/>",
     hero_title_2: "Mükemmelleştirin.",
@@ -35,11 +36,26 @@ const translations = {
     faq_2_q: "Hangi Minecraft sürümünü destekliyor?",
     faq_2_a: "Şu anda en popüler ve güncel sürüm olan 1.21.11 Fabric altyapısı ile tam uyumlu çalışmaktadır.",
     faq_3_q: "Java kurmama gerek var mı?",
-    faq_3_a: "Hayır! İndireceğiniz Kurulum (.exe) dosyası oyunun çalışması için gereken Java ve diğer tüm altyapıları arka planda kendisi halleder."
+    faq_3_a: "Hayır! İndireceğiniz Kurulum (.exe) dosyası oyunun çalışması için gereken Java ve diğer tüm altyapıları arka planda kendisi halleder.",
+    dl_title_1: "İndirme",
+    dl_title_2: "Merkezi",
+    dl_subtitle: "Lütfen Pierre Client indirmek için bir kaynak seçin.",
+    dl_direct_title: "Direkt İndir (Github)",
+    dl_direct_desc: "Resmi Github sunucularımız üzerinden en güncel ve güvenli sürümü hızlıca indirin.",
+    dl_btn_download: "Şimdi İndir",
+    dl_drive_title: "Google Drive",
+    dl_drive_desc: "Google altyapısı kullanarak dosyayı indirin. Kota sınırlarına takılabilir.",
+    dl_btn_soon: "Çok Yakında",
+    ver_title_1: "Tüm",
+    ver_title_2: "Sürümler",
+    ver_subtitle: "Pierre Client'ın yayınlanmış tüm eski ve yeni sürümleri.",
+    ver_latest: "En Yeni",
+    ver_btn_download: "İndir"
   },
   en: {
     nav_home: "Home",
     nav_features: "Features",
+    nav_versions: "Versions",
     nav_news: "News",
     hero_title_1: "Perfect Your <br/>",
     hero_title_2: "Gaming Experience.",
@@ -70,7 +86,21 @@ const translations = {
     faq_2_q: "Which Minecraft version does it support?",
     faq_2_a: "It currently runs fully compatible with the most popular and up-to-date version, 1.21.11 Fabric infrastructure.",
     faq_3_q: "Do I need to install Java?",
-    faq_3_a: "No! The Setup (.exe) file you download will handle Java and all other required infrastructures in the background on its own."
+    faq_3_a: "No! The Setup (.exe) file you download will handle Java and all other required infrastructures in the background on its own.",
+    dl_title_1: "Download",
+    dl_title_2: "Center",
+    dl_subtitle: "Please select a source to download Pierre Client.",
+    dl_direct_title: "Direct Download (Github)",
+    dl_direct_desc: "Download the most up-to-date and secure version quickly via our official Github servers.",
+    dl_btn_download: "Download Now",
+    dl_drive_title: "Google Drive",
+    dl_drive_desc: "Download the file using Google infrastructure. May be subject to quota limits.",
+    dl_btn_soon: "Coming Soon",
+    ver_title_1: "All",
+    ver_title_2: "Versions",
+    ver_subtitle: "All past and present published versions of Pierre Client.",
+    ver_latest: "Latest",
+    ver_btn_download: "Download"
   }
 };
 
