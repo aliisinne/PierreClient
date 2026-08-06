@@ -498,13 +498,7 @@
                                         </StackPanel>
                                     </Border>
 
-                                    <Border Background="#141820" CornerRadius="8" Padding="12" Margin="0,0,0,10">
-                                        <StackPanel>
-                                            <TextBlock x:Name="TxtNews2Title" Text="Anti-Tamper Aktif" Foreground="#FFFFFF" FontWeight="Bold" FontSize="13" Margin="0,0,0,4"/>
-                                            <TextBlock x:Name="TxtNews2Desc" Text="İzinsiz mod eklemeyi önleyen güvenlik sistemi aktifleştirildi. Client artık çok daha güvenli." Foreground="#A0AAB0" FontSize="11" TextWrapping="Wrap"/>
-                                            <TextBlock x:Name="TxtNews2Date" Text="Dün, 18:30" Foreground="#00E676" FontSize="9" Margin="0,6,0,0"/>
-                                        </StackPanel>
-                                    </Border>
+
                                 </StackPanel>
                             </ScrollViewer>
                         </Grid>
