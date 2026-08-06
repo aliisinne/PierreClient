@@ -179,13 +179,31 @@ namespace PierreLauncher
             if (TxtJavaBadge != null) TxtJavaBadge.Text = isEnglish ? "Java 21 (Default - Fixed)" : "Java 21 (Varsayılan - Sabit)";
 
             // News Translations
-            if (TxtNews1Title != null) TxtNews1Title.Text = isEnglish ? "Pierre Client is Live!" : "Pierre Client Yayında!";
-            if (TxtNews1Desc != null) TxtNews1Desc.Text = isEnglish ? "The brand new Pierre Client with 1.21.11 Fabric infrastructure is now available. Mods are integrated, stability is improved." : "1.21.11 Fabric altyapısıyla yep yeni Pierre Client sürümü artık erişilebilir. Modlar entegre edildi, stabilite artırıldı.";
-            if (TxtNews1Date != null) TxtNews1Date.Text = isEnglish ? "Today, 12:00" : "Bugün, 12:00";
-            
-            if (TxtNews2Title != null) TxtNews2Title.Text = isEnglish ? "Anti-Tamper Active" : "Anti-Tamper Aktif";
-            if (TxtNews2Desc != null) TxtNews2Desc.Text = isEnglish ? "Security system preventing unauthorized mod additions is activated. The client is now much more secure." : "İzinsiz mod eklemeyi önleyen güvenlik sistemi aktifleştirildi. Client artık çok daha güvenli.";
-            if (TxtNews2Date != null) TxtNews2Date.Text = isEnglish ? "Yesterday, 18:30" : "Dün, 18:30";
+            var news = Services.UpdateService.GlobalNews;
+            if (news != null && news.Count > 0)
+            {
+                if (TxtNews1Title != null) TxtNews1Title.Text = isEnglish ? news[0].TitleEn : news[0].TitleTr;
+                if (TxtNews1Desc != null) TxtNews1Desc.Text = isEnglish ? news[0].DescEn : news[0].DescTr;
+                if (TxtNews1Date != null) TxtNews1Date.Text = isEnglish ? news[0].DateEn : news[0].DateTr;
+
+                if (news.Count > 1)
+                {
+                    if (TxtNews2Title != null) TxtNews2Title.Text = isEnglish ? news[1].TitleEn : news[1].TitleTr;
+                    if (TxtNews2Desc != null) TxtNews2Desc.Text = isEnglish ? news[1].DescEn : news[1].DescTr;
+                    if (TxtNews2Date != null) TxtNews2Date.Text = isEnglish ? news[1].DateEn : news[1].DateTr;
+                }
+            }
+            else
+            {
+                // Fallback hardcoded if no internet or failed to load
+                if (TxtNews1Title != null) TxtNews1Title.Text = isEnglish ? "Pierre Client is Live!" : "Pierre Client Yayında!";
+                if (TxtNews1Desc != null) TxtNews1Desc.Text = isEnglish ? "The brand new Pierre Client with 1.21.11 Fabric infrastructure is now available. Mods are integrated, stability is improved." : "1.21.11 Fabric altyapısıyla yep yeni Pierre Client sürümü artık erişilebilir. Modlar entegre edildi, stabilite artırıldı.";
+                if (TxtNews1Date != null) TxtNews1Date.Text = isEnglish ? "Today, 12:00" : "Bugün, 12:00";
+                
+                if (TxtNews2Title != null) TxtNews2Title.Text = isEnglish ? "Anti-Tamper Active" : "Anti-Tamper Aktif";
+                if (TxtNews2Desc != null) TxtNews2Desc.Text = isEnglish ? "Security system preventing unauthorized mod additions is activated. The client is now much more secure." : "İzinsiz mod eklemeyi önleyen güvenlik sistemi aktifleştirildi. Client artık çok daha güvenli.";
+                if (TxtNews2Date != null) TxtNews2Date.Text = isEnglish ? "Yesterday, 18:30" : "Dün, 18:30";
+            }
         }
 
         private void RenderAccountsList()

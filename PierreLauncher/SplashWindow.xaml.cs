@@ -6,6 +6,7 @@ using System.Windows.Media.Animation;
 using System.IO.Compression;
 using System.Net.Http;
 using System.Linq;
+using PierreLauncher.Services;
 
 namespace PierreLauncher
 {
@@ -62,13 +63,38 @@ namespace PierreLauncher
             }
 
             // Check Internet Connection
-            await UpdateProgressAsync("İnternet bağlantısı kontrol ediliyor...", 50, 0);
+            await UpdateProgressAsync("İnternet bağlantısı kontrol ediliyor...", 40, 0);
             try
             {
                 using var client = new System.Net.Http.HttpClient();
                 client.Timeout = TimeSpan.FromSeconds(3);
                 await client.GetAsync("https://meta.fabricmc.net/");
-                await UpdateProgressAsync("Bağlantı başarılı.", 70, 200);
+                await UpdateProgressAsync("Bağlantı başarılı.", 50, 200);
+
+                // Auto-Updater and News Fetch
+                await UpdateProgressAsync("Güncellemeler kontrol ediliyor...", 55, 0);
+                var updateService = new UpdateService();
+                
+                var versionInfo = await updateService.CheckForUpdatesAsync();
+                if (versionInfo != null && versionInfo.LatestVersion != UpdateService.CurrentVersion)
+                {
+                    await UpdateProgressAsync("Yeni güncelleme bulundu. İndiriliyor...", 60, 0);
+                    string newExePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PierreLauncher_Update.exe");
+                    bool success = await updateService.DownloadUpdateAsync(versionInfo.DownloadUrl, newExePath);
+                    if (success)
+                    {
+                        await UpdateProgressAsync("Güncelleme indirildi. Yeniden başlatılıyor...", 70, 500);
+                        updateService.ApplyUpdateAndRestart(newExePath);
+                        return; // Stop execution, app will restart
+                    }
+                    else
+                    {
+                        await UpdateProgressAsync("Güncelleme indirilemedi, devam ediliyor...", 65, 500);
+                    }
+                }
+
+                await UpdateProgressAsync("Haberler alınıyor...", 70, 0);
+                UpdateService.GlobalNews = await updateService.FetchNewsAsync();
             }
             catch
             {

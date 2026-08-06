@@ -1,0 +1,18 @@
+[
+  {
+    "titleTr": "Pierre Client Yayında!",
+    "titleEn": "Pierre Client is Live!",
+    "descTr": "1.21.11 Fabric altyapısıyla yep yeni Pierre Client sürümü artık erişilebilir. Modlar entegre edildi, stabilite artırıldı.",
+    "descEn": "The brand new Pierre Client with 1.21.11 Fabric infrastructure is now available. Mods are integrated, stability is improved.",
+    "dateTr": "Bugün, 12:00",
+    "dateEn": "Today, 12:00"
+  },
+  {
+    "titleTr": "Anti-Tamper Aktif",
+    "titleEn": "Anti-Tamper Active",
+    "descTr": "İzinsiz mod eklemeyi önleyen güvenlik sistemi aktifleştirildi. Client artık çok daha güvenli.",
+    "descEn": "Security system preventing unauthorized mod additions is activated. The client is now much more secure.",
+    "dateTr": "Dün, 18:30",
+    "dateEn": "Yesterday, 18:30"
+  }
+]
