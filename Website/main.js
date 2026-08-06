@@ -1,50 +1,153 @@
 import './style.css'
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const newsContainer = document.getElementById('news-container');
-  
-  try {
-    // Fetch news from the raw github url
-    // To ensure Cloudflare always has the latest, we fetch client-side from the master branch!
-    const response = await fetch('https://raw.githubusercontent.com/aliisinne/PierreClient/master/news.json');
-    
-    if (!response.ok) throw new Error('Network response was not ok');
-    
-    const newsData = await response.json();
-    
-    // Clear loading text
-    newsContainer.innerHTML = '';
-    
-    // Parse and display news
-    if (newsData && newsData.length > 0) {
-      newsData.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'news-card glass-panel';
-        
-        card.innerHTML = `
-          <h4 class="news-title">${item.titleTr}</h4>
-          <p class="news-desc">${item.descTr}</p>
-          <span class="news-date">${item.dateTr}</span>
-        `;
-        
-        newsContainer.appendChild(card);
-      });
-    } else {
-      newsContainer.innerHTML = '<div class="loading">Şu an gösterilecek bir haber bulunmuyor.</div>';
-    }
-    
-  } catch (error) {
-    console.error('Haberler yüklenirken hata oluştu:', error);
-    newsContainer.innerHTML = '<div class="loading">Haberler yüklenirken bir sorun oluştu. Daha sonra tekrar deneyin.</div>';
+// Translations Dictionary
+const translations = {
+  tr: {
+    nav_home: "Ana Sayfa",
+    nav_features: "Özellikler",
+    nav_news: "Haberler",
+    hero_title_1: "Oyun Deneyiminizi <br/>",
+    hero_title_2: "Mükemmelleştirin.",
+    hero_subtitle: "1.21.11 Fabric altyapısıyla yep yeni Pierre Client sürümü artık erişilebilir. Yüksek FPS, entegre modlar ve ultra güvenlik.",
+    hero_download: "HEMEN İNDİR",
+    hero_more: "Daha Fazla Bilgi",
+    hero_version: "Sürüm: v1.0.0 | Boyut: ~160 MB",
+    feat_title_1: "Neden",
+    feat_1_title: "Yüksek Performans",
+    feat_1_desc: "Sodium, Lithium ve diğer optimizasyon modlarıyla standart istemcilere göre çok daha yüksek FPS değerleri.",
+    feat_2_title: "Modern Arayüz",
+    feat_2_desc: "Oyuncular için özel olarak tasarlanmış, cam tasarımlı ve tamamen kişiselleştirilebilir Launcher deneyimi.",
+    feat_3_title: "Bağımsız Kurulum",
+    feat_3_desc: "Bilgisayarınızda Java yüklü olmasına bile gerek yok. Kurulum aracı tüm kütüphaneleri arka planda kendi ayarlar.",
+    news_title_1: "Canlı",
+    news_title_2: "Haberler",
+    news_subtitle: "Oyun içi güncellemeler ve duyurular doğrudan buraya yansır.",
+    news_loading: "Haberler yükleniyor...",
+    news_empty: "Şu an gösterilecek bir haber bulunmuyor.",
+    news_error: "Haberler yüklenirken bir sorun oluştu. Daha sonra tekrar deneyin."
+  },
+  en: {
+    nav_home: "Home",
+    nav_features: "Features",
+    nav_news: "News",
+    hero_title_1: "Perfect Your <br/>",
+    hero_title_2: "Gaming Experience.",
+    hero_subtitle: "The brand new Pierre Client with 1.21.11 Fabric is now available. High FPS, integrated mods, and ultra security.",
+    hero_download: "DOWNLOAD NOW",
+    hero_more: "Learn More",
+    hero_version: "Version: v1.0.0 | Size: ~160 MB",
+    feat_title_1: "Why",
+    feat_1_title: "High Performance",
+    feat_1_desc: "Much higher FPS values compared to standard clients with Sodium, Lithium, and other optimization mods.",
+    feat_2_title: "Modern Interface",
+    feat_2_desc: "A custom-designed, glassmorphic, and fully customizable Launcher experience for players.",
+    feat_3_title: "Standalone Install",
+    feat_3_desc: "You don't even need Java installed. The installer automatically handles all libraries in the background.",
+    news_title_1: "Live",
+    news_title_2: "News",
+    news_subtitle: "In-game updates and announcements reflect directly here.",
+    news_loading: "Loading news...",
+    news_empty: "There is no news to show right now.",
+    news_error: "An error occurred while loading news. Please try again later."
   }
+};
+
+let currentLang = 'tr';
+let newsDataCache = []; // Store news so we can re-render when language changes
+
+document.addEventListener('DOMContentLoaded', async () => {
+  // --- 1. Language Support ---
+  const langBtn = document.getElementById('lang-btn');
   
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+  const updateLanguage = () => {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[currentLang][key]) {
+        // If it contains HTML (like <br/>), use innerHTML, else textContent
+        if (translations[currentLang][key].includes('<br/>')) {
+          el.innerHTML = translations[currentLang][key];
+        } else {
+          el.textContent = translations[currentLang][key];
+        }
+      }
+    });
+    
+    // Re-render news if loaded
+    renderNews();
+  };
+
+  langBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'tr' ? 'en' : 'tr';
+    updateLanguage();
+  });
+
+  // --- 2. SPA Routing (Views) ---
+  const navLinks = document.querySelectorAll('.nav-link');
+  const views = document.querySelectorAll('.view');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
       e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
+      
+      const targetView = link.getAttribute('data-target');
+      
+      // Update active nav link
+      document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
+      // Only set nav items in header as active, not buttons in hero
+      if(link.closest('nav')) link.classList.add('active');
+
+      // Hide all views, show target
+      views.forEach(view => {
+        if (view.id === 'view-' + targetView) {
+          view.classList.add('active');
+        } else {
+          view.classList.remove('active');
+        }
       });
     });
   });
+
+  // --- 3. Dynamic News ---
+  const newsContainer = document.getElementById('news-container');
+  
+  const renderNews = () => {
+    if (newsDataCache.length === 0) return;
+    
+    newsContainer.innerHTML = '';
+    newsDataCache.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'news-card glass-panel';
+      
+      const title = currentLang === 'en' ? item.titleEn : item.titleTr;
+      const desc = currentLang === 'en' ? item.descEn : item.descTr;
+      const date = currentLang === 'en' ? item.dateEn : item.dateTr;
+      
+      card.innerHTML = `
+        <h4 class="news-title">${title}</h4>
+        <p class="news-desc">${desc}</p>
+        <span class="news-date">${date}</span>
+      `;
+      
+      newsContainer.appendChild(card);
+    });
+  };
+
+  try {
+    const response = await fetch('https://raw.githubusercontent.com/aliisinne/PierreClient/master/news.json');
+    if (!response.ok) throw new Error('Network response was not ok');
+    
+    newsDataCache = await response.json();
+    
+    if (newsDataCache && newsDataCache.length > 0) {
+      renderNews();
+    } else {
+      newsContainer.innerHTML = `<div class="loading" data-i18n="news_empty">${translations[currentLang].news_empty}</div>`;
+    }
+  } catch (error) {
+    console.error('Error fetching news:', error);
+    newsContainer.innerHTML = `<div class="loading" data-i18n="news_error">${translations[currentLang].news_error}</div>`;
+  }
+  
+  // Initialize language on load
+  updateLanguage();
 });

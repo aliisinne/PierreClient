@@ -359,3 +359,12 @@ body {
   .hero-actions { flex-direction: column; }
   .feature-grid { grid-template-columns: 1fr; }
 }
+
+/* View System */
+.view { display: none; animation: fadeIn 0.4s ease; }
+.view.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.lang-btn { font-weight: bold; background: rgba(0,230,118,0.15); border: 1px solid rgba(0,230,118,0.5); color: #00E676; cursor: pointer; }
+.lang-btn:hover { background: rgba(0,230,118,0.3); color: #fff; }
+.nav-link.active { color: var(--color-primary); font-weight: 700; }
