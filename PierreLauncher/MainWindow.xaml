@@ -618,9 +618,9 @@
                     </Border>
                 </Grid>
 
-                <!-- FOOTER BAR (Updated Version String: Version: 0.0.1 (Alpha)) -->
+                <!-- FOOTER BAR -->
                 <Grid Grid.Row="2" Margin="4,6,4,0">
-                    <TextBlock Text="Version: 1.1.0 • Pierre Client Fabric 1.21.11" Foreground="#90FFFFFF" FontSize="11" HorizontalAlignment="Left"/>
+                    <TextBlock x:Name="TxtVersionLabel" Text="Version: 1.1.0 • Pierre Client Fabric 1.21.11" Foreground="#90FFFFFF" FontSize="11" HorizontalAlignment="Left"/>
                 </Grid>
 
                 <!-- SNACKBAR NOTIFICATION (Appears from bottom) -->

@@ -33,6 +33,9 @@ namespace PierreLauncher
             LoadLogos();
             LoadData();
 
+            // Versiyon etiketini her zaman UpdateService.CurrentVersion'dan al
+            TxtVersionLabel.Text = $"Version: {UpdateService.CurrentVersion} • Pierre Client Fabric 1.21.11";
+
             // First run check: If no account exists, prompt account view or account creation immediately
             if (_configService.Config.Accounts.Count == 0)
             {
