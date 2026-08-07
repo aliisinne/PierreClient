@@ -3,6 +3,7 @@ import './style.css'
 // Translations Dictionary
 const translations = {
   tr: {
+    hero_badge: "v1.1.0 — Yeni Sürüm Yayınlandı",
     nav_home: "Ana Sayfa",
     nav_features: "Özellikler",
     nav_versions: "Sürümler",
@@ -12,7 +13,12 @@ const translations = {
     hero_subtitle: "1.21.11 Fabric altyapısıyla yep yeni Pierre Client sürümü artık erişilebilir. Yüksek FPS, entegre modlar ve ultra güvenlik.",
     hero_download: "HEMEN İNDİR",
     hero_more: "Daha Fazla Bilgi",
-    hero_version: "Sürüm: v1.0.0 | Boyut: ~160 MB",
+    hero_version: "Sürüm: v1.1.0 · Windows x64 · ~165 MB",
+    stat_version: "Desteklenen Sürüm",
+    stat_platform: "Mod Altyapısı",
+    stat_free: "Ücretsiz & Açık Kaynak",
+    feat_label: "Neden Pierre Client?",
+    feat_subtitle: "Oyun deneyiminizi her yönden geliştirmek için tasarlandı.",
     feat_title_1: "Neden",
     feat_1_title: "Yüksek Performans",
     feat_1_desc: "Sodium, Lithium ve diğer optimizasyon modlarıyla standart istemcilere göre çok daha yüksek FPS değerleri.",
@@ -53,6 +59,7 @@ const translations = {
     ver_btn_download: "İndir"
   },
   en: {
+    hero_badge: "v1.1.0 — New Version Released",
     nav_home: "Home",
     nav_features: "Features",
     nav_versions: "Versions",
@@ -62,7 +69,12 @@ const translations = {
     hero_subtitle: "The brand new Pierre Client with 1.21.11 Fabric is now available. High FPS, integrated mods, and ultra security.",
     hero_download: "DOWNLOAD NOW",
     hero_more: "Learn More",
-    hero_version: "Version: v1.0.0 | Size: ~160 MB",
+    hero_version: "Version: v1.1.0 · Windows x64 · ~165 MB",
+    stat_version: "Supported Version",
+    stat_platform: "Mod Platform",
+    stat_free: "Free & Open Source",
+    feat_label: "Why Pierre Client?",
+    feat_subtitle: "Designed to improve your gaming experience in every way.",
     feat_title_1: "Why",
     feat_1_title: "High Performance",
     feat_1_desc: "Much higher FPS values compared to standard clients with Sodium, Lithium, and other optimization mods.",
