@@ -1,10 +1,18 @@
 [
   {
-    "titleTr": "Pierre Client Çıktı!",
-    "titleEn": "Pierre Client is Released!",
-    "descTr": "1.21.11 sürümündeki Pierre Client tamamen erişime açıldı! Hemen indirip oynamaya başlayın.",
-    "descEn": "Pierre Client for 1.21.11 is now fully accessible! Download and start playing immediately.",
-    "dateTr": "Bugün, 12:00",
-    "dateEn": "Today, 12:00"
+    "titleTr": "Pierre Client v1.1.0 Yayınlandı!",
+    "titleEn": "Pierre Client v1.1.0 Released!",
+    "descTr": "Java 21 artık otomatik olarak indiriliyor — sıfır kurulumlu bir bilgisayarda bile çalışır. Modlar taşınabilir hale getirildi, sabit yol sorunu düzeltildi.",
+    "descEn": "Java 21 is now automatically downloaded — works even on a fresh PC with no prior setup. Mods are now portable and the hardcoded path bug has been fixed.",
+    "dateTr": "7 Ağustos 2026",
+    "dateEn": "August 7, 2026"
+  },
+  {
+    "titleTr": "Pierre Client v1.0.0 Çıktı!",
+    "titleEn": "Pierre Client v1.0.0 is Out!",
+    "descTr": "Minecraft 1.21.11 Fabric altyapısıyla Pierre Client'ın ilk resmi sürümü yayınlandı. Yüksek FPS, entegre modlar ve özel launcher ile tam bir deneyim.",
+    "descEn": "The first official release of Pierre Client with Minecraft 1.21.11 Fabric. High FPS, integrated mods, and a custom launcher for a complete experience.",
+    "dateTr": "6 Ağustos 2026",
+    "dateEn": "August 6, 2026"
   }
 ]

@@ -1,5 +1,6 @@
 {
-  "latestVersion": "1.0.0",
-  "downloadUrl": "https://github.com/aliisinne/PierreClient/releases/latest/download/PierreLauncher.exe",
-  "mandatory": true
+  "latestVersion": "1.1.0",
+  "downloadUrl": "https://github.com/aliisinne/PierreClient/releases/latest/download/PierreClient_Setup_v1.1.exe",
+  "mandatory": false,
+  "changelog": "Java 21 otomatik kurulum, taşınabilir mod desteği ve genel stabilite düzeltmeleri."
 }
