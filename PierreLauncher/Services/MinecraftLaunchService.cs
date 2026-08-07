@@ -116,13 +116,21 @@ namespace PierreLauncher.Services
 
             // Explicit Java 21 Resolution
             string? detectedJava = ResolveJavaPath(_configService.Config.JavaPath);
+            if (string.IsNullOrEmpty(detectedJava))
+            {
+                // Java 21 bulunamadı - otomatik olarak portable Adoptium JDK 21 indir
+                StatusChanged?.Invoke("Java 21 bulunamadı. Otomatik indiriliyor (yaklaşık 180 MB)...");
+                ProgressChanged?.Invoke(30);
+                detectedJava = await DownloadAndInstallJava21Async();
+            }
+
             if (!string.IsNullOrEmpty(detectedJava))
             {
                 launchOption.JavaPath = detectedJava;
             }
             else
             {
-                throw new InvalidOperationException("Minecraft 1.21.11 için Java 21 gereklidir. Lütfen sisteminize Java 21 (JDK 21) yükleyin.");
+                throw new InvalidOperationException("Java 21 otomatik indirilemedi. Lütfen https://adoptium.net adresinden Java 21 (JDK 21) yükleyin.");
             }
 
             StatusChanged?.Invoke("Minecraft Fabric 1.21.11 başlatılıyor (Hızlı Başlatma)...");
@@ -316,48 +324,127 @@ namespace PierreLauncher.Services
             if (!string.IsNullOrWhiteSpace(customJavaPath) && File.Exists(customJavaPath))
                 return customJavaPath;
 
-            // 1. Check for our newly downloaded Portable Java 21
             string pierreDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "PierreClient");
-            string portableJavaDir = Path.Combine(pierreDataDir, "Runtime", "Java21");
-            if (Directory.Exists(portableJavaDir))
-            {
-                var files = Directory.GetFiles(portableJavaDir, "java.exe", SearchOption.AllDirectories);
-                if (files.Length > 0)
-                {
-                    return files[0];
-                }
-            }
-
             string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            string programFilesX86 = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
 
-            // 2. Prioritize Java 21 JDK verified paths
-            string[] explicitJava21Paths = new string[]
+            // 1. Bizim indirdiğimiz Portable Java 21 (en güvenilir kaynak)
+            string portableJavaDir = Path.Combine(pierreDataDir, "Runtime", "Java21");
+            if (Directory.Exists(portableJavaDir))
             {
-                Path.Combine(localAppData, @"Programs\Java\jdk-21.0.11+10\bin\javaw.exe"),
-                Path.Combine(appData, @".tlauncher\starter\jre_default\jre-21.0.11-windows-x64\bin\javaw.exe"),
-                Path.Combine(appData, @"PierreLauncher\minecraft\runtime\windows-x64\java-runtime-gamma\bin\javaw.exe"),
-                Path.Combine(appData, @"com.rexgodstudios.launcher\RexGodLauncher\runtime\java-21\bin\javaw.exe"),
-                Path.Combine(programFiles, @"Java\jdk-21\bin\javaw.exe"),
-                Path.Combine(programFiles, @"Eclipse Adoptium\jdk-21.0.11.10-hotspot\bin\javaw.exe")
-            };
-
-            foreach (var javaw in explicitJava21Paths)
-            {
-                if (File.Exists(javaw))
-                    return javaw;
+                var portableFiles = Directory.GetFiles(portableJavaDir, "javaw.exe", SearchOption.AllDirectories);
+                if (portableFiles.Length > 0) return portableFiles[0];
+                var portableJava = Directory.GetFiles(portableJavaDir, "java.exe", SearchOption.AllDirectories);
+                if (portableJava.Length > 0) return portableJava[0];
             }
 
-            if (Directory.Exists(Path.Combine(programFiles, "Java")))
+            // 2. Minecraft Launcher'ın kendi runtime'ı (çok yaygın)
+            string[] mcRuntimePaths = new string[]
             {
-                var files = Directory.GetFiles(Path.Combine(programFiles, "Java"), "javaw.exe", SearchOption.AllDirectories);
-                var j21 = files.FirstOrDefault(f => f.Contains("21") || f.Contains("jdk-21"));
-                if (j21 != null) return j21;
-                if (files.Length > 0) return files[0];
+                Path.Combine(appData, @".minecraft\runtime\java-runtime-delta\windows-x64\java-runtime-delta\bin\javaw.exe"),
+                Path.Combine(appData, @".minecraft\runtime\java-runtime-gamma\windows-x64\java-runtime-gamma\bin\javaw.exe"),
+                Path.Combine(appData, @".minecraft\runtime\java-runtime-beta\windows-x64\java-runtime-beta\bin\javaw.exe"),
+            };
+            foreach (var p in mcRuntimePaths)
+                if (File.Exists(p)) return p;
+
+            // 3. Sistem Java kurulumları
+            string[] systemPaths = new string[]
+            {
+                Path.Combine(programFiles, @"Java\jdk-21\bin\javaw.exe"),
+                Path.Combine(programFiles, @"Eclipse Adoptium\jdk-21.0.11.10-hotspot\bin\javaw.exe"),
+                Path.Combine(programFiles, @"Microsoft\jdk-21.0.7.6-hotspot\bin\javaw.exe"),
+                Path.Combine(programFilesX86, @"Java\jre-21\bin\javaw.exe"),
+                Path.Combine(localAppData, @"Programs\Java\jdk-21.0.11+10\bin\javaw.exe"),
+                Path.Combine(appData, @".tlauncher\starter\jre_default\jre-21.0.11-windows-x64\bin\javaw.exe"),
+            };
+            foreach (var p in systemPaths)
+                if (File.Exists(p)) return p;
+
+            // 4. Program Files altında herhangi bir Java 21 ara
+            foreach (var pf in new[] { programFiles, programFilesX86 })
+            {
+                if (!Directory.Exists(pf)) continue;
+                var found = Directory.GetFiles(pf, "javaw.exe", SearchOption.AllDirectories)
+                    .FirstOrDefault(f => f.Contains("21") || f.Contains("jdk-21"));
+                if (found != null) return found;
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Adoptium (Eclipse Temurin) JDK 21 Windows x64 portable sürümünü indirir ve
+        /// %AppData%\PierreClient\Runtime\Java21 klasörüne kurar.
+        /// </summary>
+        private async Task<string?> DownloadAndInstallJava21Async()
+        {
+            try
+            {
+                string pierreDataDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "PierreClient");
+                string javaRuntimeDir = Path.Combine(pierreDataDir, "Runtime", "Java21");
+                string zipPath = Path.Combine(pierreDataDir, "Runtime", "java21.zip");
+
+                Directory.CreateDirectory(Path.GetDirectoryName(zipPath)!);
+
+                // Adoptium API üzerinden en güncel JDK 21 windows-x64 zip indir
+                string downloadUrl = "https://api.adoptium.net/v3/binary/latest/21/ga/windows/x64/jdk/hotspot/normal/eclipse?project=jdk";
+
+                StatusChanged?.Invoke("Java 21 indiriliyor (Adoptium JDK 21, ~175 MB)...");
+
+                using (var response = await HttpClient.GetAsync(downloadUrl, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
+                {
+                    response.EnsureSuccessStatusCode();
+                    long? totalBytes = response.Content.Headers.ContentLength;
+
+                    using var stream = await response.Content.ReadAsStreamAsync();
+                    using var fileStream = new FileStream(zipPath, FileMode.Create, FileAccess.Write, FileShare.None, 81920, true);
+
+                    byte[] buffer = new byte[81920];
+                    long downloaded = 0;
+                    int read;
+                    while ((read = await stream.ReadAsync(buffer)) > 0)
+                    {
+                        await fileStream.WriteAsync(buffer.AsMemory(0, read));
+                        downloaded += read;
+                        if (totalBytes > 0)
+                        {
+                            int pct = (int)(downloaded * 100 / totalBytes);
+                            ProgressChanged?.Invoke(Math.Min(pct, 90));
+                            StatusChanged?.Invoke($"Java 21 indiriliyor... {downloaded / 1048576} MB / {totalBytes / 1048576} MB");
+                        }
+                    }
+                }
+
+                StatusChanged?.Invoke("Java 21 açılıyor...");
+                ProgressChanged?.Invoke(92);
+
+                if (Directory.Exists(javaRuntimeDir))
+                    Directory.Delete(javaRuntimeDir, recursive: true);
+                Directory.CreateDirectory(javaRuntimeDir);
+
+                System.IO.Compression.ZipFile.ExtractToDirectory(zipPath, javaRuntimeDir);
+
+                // Zip silinsin (yer açılsın)
+                try { File.Delete(zipPath); } catch { }
+
+                // Çıkarılan klasörü bul (genellikle jdk-21.x.x+xx gibi adlanmış bir alt klasör olur)
+                var javawFiles = Directory.GetFiles(javaRuntimeDir, "javaw.exe", SearchOption.AllDirectories);
+                if (javawFiles.Length > 0)
+                {
+                    StatusChanged?.Invoke("Java 21 başarıyla kuruldu!");
+                    return javawFiles[0];
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Java 21 indirme hatası: {ex.Message}");
+                return null;
+            }
         }
 
         private void SyncPierreMods(string gameDir)
@@ -385,12 +472,20 @@ namespace PierreLauncher.Services
                     }
                 }
 
+                string pierreAppDataMods = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                    "PierreClient", "Mods");
+
                 string[] possibleSourcePaths = new string[]
                 {
-                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "Modlar"),
-                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "..", "Pierre", "Modlar"),
-                    @"C:\Users\mymai\OneDrive\Belgeler\PierreClient1.21.11\Modlar",
-                    @"C:\Users\mymai\OneDrive\Belgeler\Pierre\Modlar"
+                    // 1. Exe yanındaki Modlar klasörü (kurulum sonrası standart yer)
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modlar"),
+                    // 2. Exe'nin üst klasörlerindeki Modlar (geliştirici ortamı için)
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "Modlar"),
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Modlar"),
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "Modlar"),
+                    // 3. %AppData%\PierreClient\Mods (kurulum klasörü)
+                    pierreAppDataMods,
                 };
 
                 foreach (var src in possibleSourcePaths)

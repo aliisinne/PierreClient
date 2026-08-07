@@ -43,7 +43,7 @@ namespace PierreLauncher.Services
     {
         public static List<NewsItem> GlobalNews { get; set; } = new List<NewsItem>();
         
-        public static readonly string CurrentVersion = "1.0.0";
+        public static readonly string CurrentVersion = "1.1.0";
         private const string VersionUrl = "https://raw.githubusercontent.com/aliisinne/PierreClient/master/version.json";
         private const string NewsUrl = "https://raw.githubusercontent.com/aliisinne/PierreClient/master/news.json";
 

@@ -1,13 +1,13 @@
 [Setup]
 AppName=Pierre Client
-AppVersion=1.0.0
-AppPublisher=Pierre
+AppVersion=1.1.0
+AppPublisher=Alibine
 AppPublisherURL=https://github.com/aliisinne/PierreClient
 DefaultDirName={autopf}\Pierre Client
 DefaultGroupName=Pierre Client
 AllowNoIcons=yes
 OutputDir=Output
-OutputBaseFilename=PierreClient_Setup_v1.0
+OutputBaseFilename=PierreClient_Setup_v1.1
 SetupIconFile=PierreLauncher\Assets\icon.ico
 Compression=lzma
 SolidCompression=yes
@@ -25,6 +25,8 @@ Source: "Publish\PierreLauncher.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Start.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Oyunu Başlat.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Publish\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+; Modlar klasörünü %AppData%\PierreClient\Mods altına kur (her bilgisayarda çalışır)
+Source: "Modlar\*"; DestDir: "{userappdata}\PierreClient\Mods"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
